@@ -1,0 +1,19 @@
+.add-task-btn {
+  border: none;
+  width: 50px;
+  height: 50px;
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.add-task-sign {
+  color: white;
+}

@@ -1,0 +1,61 @@
+.main-modal {
+  background-color: rgba(255, 255, 255, 0.95);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 1.3s;
+}
+.task-modal {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 15px 15px 5px 15px;
+  background-color: rgb(212, 212, 212);
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.task-modal > input,
+.task-modal > textarea {
+  margin-bottom: 10px;
+  height: 40px;
+  padding-left: 5px;
+}
+
+.task-modal > textarea {
+  height: 100px;
+}
+
+.radio-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.radio-btns {
+  display: flex;
+  align-items: center;
+}
+
+.add-btn {
+  margin: 0 auto;
+  background-color: orange;
+  width: max-content;
+  padding: 5px 50px;
+  border: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  width: 2em;
+  height: 2em;
+  background-color: grey;
+}

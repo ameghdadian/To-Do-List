@@ -1,0 +1,44 @@
+.App {
+  text-align: center;
+  margin: 40px;
+  min-height: 100vh;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.app-header h2 {
+  margin: 0 auto;
+  padding-right: 20px;
+}
+
+.done-tasks {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid black;
+  background-color: blue;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.intro-btn {
+  display: inline-block;
+  background-color: orange;
+  padding: 15px 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 25%;
+  cursor: pointer;
+}
+
+.intro-btn:active,
+.intro-btn:link {
+  outline: none;
+}
