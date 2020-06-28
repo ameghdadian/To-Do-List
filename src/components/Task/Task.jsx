@@ -1,63 +1,60 @@
 import React from "react";
+import { connect } from "react-redux";
 
-/*
+import { doneTask } from "../../Redux/Tasks/tasks.actions";
 
-*/
+import "./Task.scss";
 
-const Task = ({ task: { taskDescription, taskImportance, taskTitle } }) => {
-  console.log(taskTitle);
+const Task = ({ task, finishTask, toggleEditTask }) => {
+  const { taskDescription, taskImportance, taskTitle, taskId } = task;
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        width: "95%",
-        border: "1px solid black",
-        padding: "10px 20px",
-        marginTop: "25px",
-        borderRadius: "20px",
-      }}
-    >
+    <div className="task">
       <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
+        className="task-title-description"
+        onClick={() => console.log("Im clicked!")}
       >
-        <h3 style={{ textAlign: "left", marginTop: "0" }}>{taskTitle}</h3>
-        <p>{taskDescription.split(" ").slice(0, 10).join(" ") + " ..."}</p>
+        <h3 className="task-title">{taskTitle}</h3>
+        <p className="task-decription">
+          {taskDescription.split(" ").slice(0, 10).join(" ") + " ..."}
+        </p>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
-      >
-        <div
-          style={{ display: "flex", alignItems: "center", marginLeft: "auto" }}
-        >
-          <label style={{ marginRight: "15px" }}>{taskImportance}</label>
+      <div className="task-importance-operations">
+        <div className="task-importance">
+          <label className="task-importance-label">{taskImportance}</label>
           <div
-            style={{
-              display: "flex",
-              width: "20px",
-              height: "20px",
-              borderRadius: "50%",
-              backgroundColor: "red",
-              textAlign: "right",
-            }}
+            className={`${
+              taskImportance === "Low"
+                ? "Low"
+                : taskImportance === "Medium"
+                ? "Medium"
+                : "High"
+            } task-importance-emergency`}
           ></div>
         </div>
 
-        <div>
-          <button>Done Task</button>
-          <button> Edit Task</button>
+        <div className="task-importance-btns">
+          <button
+            onClick={() => {
+              finishTask({
+                taskId,
+                taskDescription,
+                taskImportance,
+                taskTitle,
+                finishTask,
+              });
+            }}
+          >
+            Done Task
+          </button>
+          <button onClick={() => toggleEditTask(task)}>Edit Task</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default Task;
+const mapDispatchToProps = (dispatch) => ({
+  finishTask: (taskId) => dispatch(doneTask(taskId)),
+});
+
+export default connect(null, mapDispatchToProps)(Task);

@@ -2,15 +2,15 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import { addTask } from "../../Redux/Tasks/tasks.actions";
+import { editTask } from "../../Redux/Tasks/tasks.actions";
 
-import "./TaskToAdd.scss";
+import "./EditTask.scss";
 
-const TaskToAdd = ({ toggleModal, addTask, lastTaskId }) => {
-  const [taskTitle, setTaskTitle] = useState("");
-  const [taskDescription, setTaskDescription] = useState("");
-  const [taskGifts, setTaskGifts] = useState("");
-  const [taskImportance, setTaskImportance] = useState("");
+const EditTask = ({ toggleEditTask, editTask, task }) => {
+  const [taskTitle, setTaskTitle] = useState(task.taskTitle);
+  const [taskDescription, setTaskDescription] = useState(task.taskDescription);
+  const [taskGifts, setTaskGifts] = useState(task.taskGifts);
+  const [taskImportance, setTaskImportance] = useState(task.taskImportance);
 
   const onInputChange = (event) => {
     const { name, value } = event.target;
@@ -33,8 +33,8 @@ const TaskToAdd = ({ toggleModal, addTask, lastTaskId }) => {
   };
 
   const onSubmitTask = () => {
-    addTask({
-      taskId: lastTaskId === undefined ? 0 : lastTaskId + 1,
+    editTask({
+      taskId: task.taskId,
       taskTitle: taskTitle,
       taskDescription: taskDescription,
       taskGifts: taskGifts,
@@ -44,19 +44,6 @@ const TaskToAdd = ({ toggleModal, addTask, lastTaskId }) => {
 
   return (
     <div className="main-modal">
-      <div
-        onClick={toggleModal}
-        style={{
-          position: "absolute",
-          top: "40px",
-          right: "40px",
-          fontSize: "25px",
-          color: "#665998",
-          cursor: "pointer",
-        }}
-      >
-        X
-      </div>
       <div className="task-modal">
         <input
           type="text"
@@ -86,6 +73,7 @@ const TaskToAdd = ({ toggleModal, addTask, lastTaskId }) => {
               value="Low"
               id="radio-1"
               onChange={onInputChange}
+              checked={taskImportance === "Low"}
             />
             <label htmlFor="radio-1">Low</label>
           </div>
@@ -96,6 +84,7 @@ const TaskToAdd = ({ toggleModal, addTask, lastTaskId }) => {
               value="Medium"
               id="radio-2"
               onChange={onInputChange}
+              checked={taskImportance === "Medium"}
             />
             <label htmlFor="radio-2">Medium</label>
           </div>
@@ -106,6 +95,7 @@ const TaskToAdd = ({ toggleModal, addTask, lastTaskId }) => {
               value="High"
               id="radio-3"
               onChange={onInputChange}
+              checked={taskImportance === "High"}
             />
             <label htmlFor="radio-3">High</label>
           </div>
@@ -113,27 +103,19 @@ const TaskToAdd = ({ toggleModal, addTask, lastTaskId }) => {
         <a
           className="add-btn"
           onClick={() => {
-            if (taskTitle && taskDescription && taskGifts && taskImportance) {
-              toggleModal();
-              onSubmitTask();
-            } else {
-              alert("Please fill all the fields");
-            }
+            toggleEditTask();
+            onSubmitTask();
           }}
         >
-          Add To Tasks
+          Edit Task
         </a>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  lastTaskId: state.tasks.lastTaskId,
-});
-
 const mapDispatchToProps = (dispatch) => ({
-  addTask: (task) => dispatch(addTask(task)),
+  editTask: (task) => dispatch(editTask(task)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskToAdd);
+export default connect(null, mapDispatchToProps)(EditTask);
