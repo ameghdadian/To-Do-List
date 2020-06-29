@@ -27,6 +27,11 @@ export const tasksReducer = (state = initialState, action) => {
         ...state,
         activeTasks: editTask(state.activeTasks, action.payload),
       };
+    case taskTypes.REMOVE_TASK:
+      return {
+        ...state,
+        activeTasks: removeFromTasks(state.activeTasks, action.payload),
+      };
     default:
       return state;
   }

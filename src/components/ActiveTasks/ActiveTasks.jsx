@@ -5,13 +5,19 @@ import Task from "../Task/Task";
 
 import "./ActiveTasks.scss";
 
-const ActiveTasks = ({ toggleModal, activeTasks, toggleEditTask }) => {
+const ActiveTasks = ({
+  toggleModal,
+  activeTasks,
+  toggleEditTask,
+  toggleOnClickToShowTask,
+}) => {
   return (
     <div>
       {activeTasks.map((task, indx) => (
         <Task
           toggleModal={toggleModal}
           toggleEditTask={toggleEditTask}
+          toggleOnClickToShowTask={toggleOnClickToShowTask}
           key={indx}
           task={task}
         />

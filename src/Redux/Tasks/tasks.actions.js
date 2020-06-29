@@ -14,3 +14,8 @@ export const editTask = (taskDetails) => ({
   type: taskTypes.EDIT_TASK,
   payload: taskDetails,
 });
+
+export const removeTask = (taskDetails) => ({
+  type: taskTypes.REMOVE_TASK,
+  payload: taskDetails,
+});

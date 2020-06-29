@@ -14,8 +14,9 @@
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
+  text-align: left;
+  min-width: max-content;
   .task-title {
-    text-align: left;
     margin-top: 0;
   }
 

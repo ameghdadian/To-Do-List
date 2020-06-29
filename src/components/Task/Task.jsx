@@ -5,13 +5,18 @@ import { doneTask } from "../../Redux/Tasks/tasks.actions";
 
 import "./Task.scss";
 
-const Task = ({ task, finishTask, toggleEditTask }) => {
+const Task = ({
+  task,
+  finishTask,
+  toggleEditTask,
+  toggleOnClickToShowTask,
+}) => {
   const { taskDescription, taskImportance, taskTitle, taskId } = task;
   return (
     <div className="task">
       <div
         className="task-title-description"
-        onClick={() => console.log("Im clicked!")}
+        onClick={() => toggleOnClickToShowTask(task)}
       >
         <h3 className="task-title">{taskTitle}</h3>
         <p className="task-decription">
@@ -54,7 +59,7 @@ const Task = ({ task, finishTask, toggleEditTask }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  finishTask: (taskId) => dispatch(doneTask(taskId)),
+  finishTask: (task) => dispatch(doneTask(task)),
 });
 
 export default connect(null, mapDispatchToProps)(Task);

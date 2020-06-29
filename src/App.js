@@ -7,6 +7,7 @@ import TaskToAdd from "./components/TaskToAdd/TaskToAdd";
 import ActiveTasks from "./components/ActiveTasks/ActiveTasks";
 import EditTask from "./components/EditTask/EditTask";
 import DoneTasks from "./components/DoneTasks/DoneTasks";
+import TaskToShow from "./components/TaskToShow/TaskToShow";
 
 import "./App.scss";
 
@@ -16,6 +17,8 @@ const App = ({ haveActiveTasks, doneTasks }) => {
   const [isTaskToBeEdited, setIsTaskToBeEdited] = useState(false);
   const [currentTaskToBeEdited, setCurrentTaskToBeEdited] = useState(null);
   const [showDoneModal, setShowDoneModal] = useState(false);
+  const [ShowATask, setShowATask] = useState(false);
+  const [currentTaskToBeShown, setCurrentTaskToBeShown] = useState(null);
 
   const addFirstTask = () => {
     setIsFirstTask(!isFirstTask);
@@ -33,6 +36,11 @@ const App = ({ haveActiveTasks, doneTasks }) => {
   const toggleEditTask = (taskToBeEdited) => {
     setCurrentTaskToBeEdited(taskToBeEdited);
     setIsTaskToBeEdited(!isTaskToBeEdited);
+  };
+
+  const toggleOnClickToShowTask = (task) => {
+    setCurrentTaskToBeShown(task);
+    setShowATask(!ShowATask);
   };
 
   return (
@@ -64,6 +72,7 @@ const App = ({ haveActiveTasks, doneTasks }) => {
         <ActiveTasks
           toggleModal={toggleModal}
           toggleEditTask={toggleEditTask}
+          toggleOnClickToShowTask={toggleOnClickToShowTask}
         />
       )}
       {isTaskToBeEdited && (
@@ -77,6 +86,15 @@ const App = ({ haveActiveTasks, doneTasks }) => {
       {showDoneModal && (
         <Modal>
           <DoneTasks doneTasks={doneTasks} toggleDoneModal={toggleDoneModal} />
+        </Modal>
+      )}
+      {ShowATask && (
+        <Modal>
+          <TaskToShow
+            toggleOnClickToShowTask={toggleOnClickToShowTask}
+            toggleEditTask={toggleEditTask}
+            task={currentTaskToBeShown}
+          />
         </Modal>
       )}
     </div>
